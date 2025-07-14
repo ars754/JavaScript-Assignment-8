@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>JS Problem Solving Assignment</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f9f9f9;
+            padding: 40px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+        h3 {
+            margin-top: 25px;
+            color: #34495e;
+        }
+        input[type="text"],
+        input[type="number"] {
+            padding: 10px;
+            margin: 5px;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #3498db;
+        }     
+        pre#output {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-left: 5px solid #3498db;
+            margin-top: 20px;
+            font-size: 16px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+  <h1>JS Problem Solving Assignment</h1>
+
+  <!-- Q1 Inputs -->
+  <h3>Q1. Minimal Angle</h3>
+  <input id="hour" type="number" placeholder="Hour (0–12)" />
+  <input id="minute" type="number" placeholder="Minute (0–59)" />
+  <button onclick="q1()">Calculate Angle</button><br>
+
+  <!-- Q2 Input -->
+  <h3>Q2. Check Leap Year</h3>
+  <input id="year" type="number" placeholder="Enter Year" />
+  <button onclick="q2()">Check Leap Year</button><br>
+
+  <!-- Q3 Input -->
+  <h3>Q3. Perfect Number Check</h3>
+  <input id="perfect" type="number" placeholder="Enter Number" />
+  <button onclick="q3()">Check Perfect Number</button><br>
+
+  <!-- Q4 Input -->
+  <h3>Q4. Reverse Number</h3>
+  <input id="reverse" type="number" placeholder="Enter Number" />
+  <button onclick="q4()">Reverse</button><br>
+
+  <!-- Q5 Inputs -->
+  <h3>Q5. Substring Check</h3>
+  <input id="s1" type="text" placeholder="S1 (substring)" />
+  <input id="s2" type="text" placeholder="S2 (full string)" />
+  <button onclick="q5()">Check Substring</button><br>
+
+  <h3>Output</h3>
+  <pre id="output"></pre>
+
+  <script>
+    function q1() {
+      let h = parseInt(document.getElementById('hour').value);
+      let m = parseInt(document.getElementById('minute').value);
+      let hourAngle = (h % 12) * 30 + (m / 60) * 30;
+      let minuteAngle = m * 6;
+      let angle = Math.abs(hourAngle - minuteAngle);
+      document.getElementById('output').textContent = Math.min(angle, 360 - angle);
+    }
+
+    function q2() {
+      let y = parseInt(document.getElementById('year').value);
+      let result = (y % 4 === 0 && y % 100 !== 0) || (y % 400 === 0) ? "Leap Year" : "Non Leap Year";
+      document.getElementById('output').textContent = result;
+    }
+
+    function q3() {
+      let n = parseInt(document.getElementById('perfect').value);
+      if (n === 1) return document.getElementById('output').textContent = "YES";
+      let sum = 1;
+      for (let i = 2; i <= Math.sqrt(n); i++) {
+        if (n % i === 0) {
+          sum += i;
+          if (i !== n / i) sum += n / i;
+        }
+      }
+      document.getElementById('output').textContent = sum === n ? "YES" : "NO";
+    }
+
+    function q4() {
+      let n = document.getElementById('reverse').value;
+      let reversed = parseInt(n.toString().split('').reverse().join(''), 10);
+      document.getElementById('output').textContent = reversed;
+    }
+
+    function q5() {
+      let s1 = document.getElementById('s1').value;
+      let s2 = document.getElementById('s2').value;
+      document.getElementById('output').textContent = s2.includes(s1) ? "YES" : "NO";
+    }
+  </script>
+</body>
+</html>
